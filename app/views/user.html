@@ -1,0 +1,24 @@
+
+
+<ol class="breadcrumb">
+    <li><a href="#/">Alle User</a></li>
+    <li ng-repeat="folder in breadcrumbs">
+        <a href="#/user/{{breadcrumbs.slice(0, $index+1).join('/')}}">{{folder}}</a>
+    </li>
+</ol>
+
+<ul class="list-group">
+    <li ng-repeat="file in files | orderBy:['-type','name']" class="list-group-item">
+        <a ng-if="file.type=='folder'" ng-href="#/user/{{path}}/{{file.link}}">
+            <i class="glyphicon glyphicon-folder-close"></i>
+            {{file.name}}
+        </a>
+
+        <a ng-if="file.type=='file'" target="_blank"  ng-href="https://pub.informatik.haw-hamburg.de/home/pub/All/{{path}}/{{file.link}}">
+            <i class="glyphicon glyphicon-file"></i>
+            {{file.name}}
+        </a>
+        <i ng-show="hasFavItem(file)" style="float: right" class="glyphicon glyphicon-star" ng-click="removeFav(file)"></i>
+        <i ng-hide="hasFavItem(file)" style="float: right" class="glyphicon glyphicon-star-empty" ng-click="addToFav(file)"></i>
+    </li>
+</ul>
